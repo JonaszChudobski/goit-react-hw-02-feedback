@@ -1,4 +1,5 @@
 import css from './FeedbackOptions.module.css';
+import PropTypes from 'prop-types';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
@@ -15,4 +16,13 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
       ))}
     </div>
   );
+};
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.shape({
+    good: PropTypes.number,
+    neutral: PropTypes.number,
+    bad: PropTypes.number,
+  }),
+  onLeaveFeedback: PropTypes.func,
 };

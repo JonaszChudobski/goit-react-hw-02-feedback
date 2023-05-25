@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { Section } from './Section';
-import { FeedbackOptions } from './FeedbackOptions';
-import { Statistics } from './Statistics';
-import { Notification } from './Notification';
+import { Section } from './Section/Section';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Statistics } from './Statistics/Statistics';
+import { Notification } from './Notification/Notification';
 
 export class App extends Component {
   state = {
@@ -13,7 +13,7 @@ export class App extends Component {
 
   handleAdding = e => {
     const { id } = e.target;
-    this.setState({ [id]: this.state[id] + 1 });
+    this.setState(prevState => ({ [id]: prevState[id] + 1 }));
   };
 
   countTotalFeedback = () => {
@@ -23,9 +23,7 @@ export class App extends Component {
 
   countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
-    let result = 0;
-    if (!(good / this.countTotalFeedback())) return result;
-    else return Math.round((good / this.countTotalFeedback()) * 100);
+    return Math.round((good / this.countTotalFeedback()) * 100) || 0;
   };
 
   render() {
@@ -47,7 +45,7 @@ export class App extends Component {
               positivePercentage={this.countPositiveFeedbackPercentage()}
             ></Statistics>
           ) : (
-            <Notification></Notification>
+            <Notification />
           )}
         </Section>
       </>
